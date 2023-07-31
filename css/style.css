@@ -48,3 +48,6 @@ a {
 .local-nav-links a:not(:first-child) {
   margin-left: 2em;
 }
+.scroll-section {
+  padding-top: 50vh;
+}
