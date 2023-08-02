@@ -59,7 +59,7 @@ a {
 }
 
 .main-message {
-  display: flex; 
+  display: flex;
   align-items: center;
   justify-content: center;
   height: 3em;
@@ -125,6 +125,12 @@ a {
   background: darkorange;
   color: white;
 }
+.sticky-elem {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
 
 @media (min-width: 1024px) {
   #scroll-section-0 h1 {
@@ -162,5 +168,4 @@ a {
     margin: 0 auto;
     font-size: 2rem;
   }
-  
 }
