@@ -45,7 +45,14 @@
         i
       ].objs.container.style.height = `${sceneInfo[i].scrollHeiht}px`;
     }
+    let yScroll = 0;
+    function scrollLoop() {
+      console.log(window.scrollY);
+    }
     window.addEventListener("resize", setLayout);
+    window.addEventListener("scroll", () => {
+      scrollLoop();
+    });
     console.log(sceneInfo);
   }
   setLayout();
