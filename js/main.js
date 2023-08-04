@@ -50,8 +50,9 @@
     }
 
     function scrollLoop() {
+      prevScrollHeight = 0;
+
       for (let i = 0; i < currentScene; i++) {
-        prevScrollHeight = 0;
         prevScrollHeight = prevScrollHeight + sceneInfo[i].scrollHeight;
       }
       if (yScroll > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
