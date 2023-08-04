@@ -10,6 +10,13 @@
       scrollHeight: 0,
       objs: {
         container: document.querySelector("#scroll-section-0"),
+        messageA: document.querySelector("#scroll-section-0 .main-message.a"),
+        messageB: document.querySelector("#scroll-section-0 .main-message.b"),
+        messageC: document.querySelector("#scroll-section-0 .main-message.c"),
+        messageD: document.querySelector("#scroll-section-0 .main-message.d"),
+      },
+      values: {
+        messageA_opacity: [0, 1],
       },
     },
     {
@@ -49,25 +56,59 @@
       ].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
     }
 
-    function scrollLoop() {
-      prevScrollHeight = 0;
-
-      for (let i = 0; i < currentScene; i++) {
-        prevScrollHeight = prevScrollHeight + sceneInfo[i].scrollHeight;
+    yScroll = window.scrollY;
+    let totalScrollHeight = 0;
+    for (let i = 0; i < sceneInfo.length; i++) {
+      totalScrollHeight += sceneInfo[i].scrollHeight;
+      if (totalScrollHeight >= yScroll) {
+        currentScene = i;
+        break;
       }
-      if (yScroll > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
-        currentScene++;
-      }
-      if (yScroll < prevScrollHeight) {
-        currentScene--;
-      }
-      console.log(currentScene);
     }
-    window.addEventListener("resize", setLayout);
-    window.addEventListener("scroll", () => {
-      yScroll = window.scrollY;
-      scrollLoop();
-    });
+    document.body.setAttribute("id", `show-scene-${currentScene}`);
   }
+
+  function playAnimation() {
+    switch (currentScene) {
+      case 0:
+        console.log("0 play");
+        break;
+      case 1:
+        console.log("1 play");
+
+        break;
+      case 2:
+        console.log("2 play");
+
+        break;
+      case 3:
+        console.log("3 play");
+
+        break;
+    }
+  }
+  function scrollLoop() {
+    prevScrollHeight = 0;
+
+    for (let i = 0; i < currentScene; i++) {
+      prevScrollHeight = prevScrollHeight + sceneInfo[i].scrollHeight;
+    }
+    if (yScroll > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+      currentScene++;
+      document.body.setAttribute("id", `show-scene-${currentScene}`);
+    }
+    if (yScroll < prevScrollHeight) {
+      currentScene--;
+    }
+    playAnimation();
+  }
+  window.addEventListener("resize", setLayout);
+  window.addEventListener("scroll", () => {
+    yScroll = window.scrollY;
+    scrollLoop();
+  });
+  window.addEventListener("load", setLayout);
+  window.addEventListener("resize", setLayout);
+
   setLayout();
 })();
