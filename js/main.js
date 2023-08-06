@@ -68,21 +68,36 @@
     document.body.setAttribute("id", `show-scene-${currentScene}`);
   }
 
+  function calcValues(values, currentYScroll) {
+    let rv;
+    let scrollRatio = currentYScroll / sceneInfo[currentScene].scrollHeight;
+    rv = scrollRatio * (values[1] - values[0]) + values[0];
+    return rv;
+  }
+
   function playAnimation() {
+    const values = sceneInfo[currentScene].values;
+    const objs = sceneInfo[currentScene].objs;
+    const currentYScroll = yScroll - prevScrollHeight;
     switch (currentScene) {
       case 0:
-        console.log("0 play");
+        // console.log("0 play");
+        let messageA_opacity_in = calcValues(
+          values.messageA_opacity,
+          currentYScroll,
+        );
+        objs.messageA.style.opacity = messageA_opacity_in;
         break;
       case 1:
-        console.log("1 play");
+        //        console.log("1 play");
 
         break;
       case 2:
-        console.log("2 play");
+        //       console.log("2 play");
 
         break;
       case 3:
-        console.log("3 play");
+        //      console.log("3 play");
 
         break;
     }
@@ -91,15 +106,15 @@
     prevScrollHeight = 0;
 
     for (let i = 0; i < currentScene; i++) {
-      prevScrollHeight = prevScrollHeight + sceneInfo[i].scrollHeight;
+      prevScrollHeight += sceneInfo[i].scrollHeight;
     }
     if (yScroll > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
       currentScene++;
-      document.body.setAttribute("id", `show-scene-${currentScene}`);
     }
     if (yScroll < prevScrollHeight) {
       currentScene--;
     }
+    document.body.setAttribute("id", `show-scene-${currentScene}`);
     playAnimation();
   }
   window.addEventListener("resize", setLayout);
